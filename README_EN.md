@@ -8,7 +8,7 @@ This project targets the ICLR 2025 and ICLR 2026 paper collections and uses an L
 YEAR=2025 uv run main.py pipeline --extract-max-concurrency=50 --crawl-max-concurrency=10
 YEAR=2026 uv run main.py pipeline --extract-max-concurrency=50 --crawl-max-concurrency=10
 ```
-For detailed usage, see: [Usage Guide](./使用方法.md). For the project’s technical design, see: [Design Doc](./设计文档.md)
+For detailed usage, see: [Usage Guide](./USAGE_EN.md). For the project’s technical design, see: [Design Doc](./DESIGN_DOC_EN.md)
 
 ## Conclusions and Recommendations
 Summary:
