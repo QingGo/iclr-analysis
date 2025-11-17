@@ -8,7 +8,7 @@
 YEAR=2025 uv run main.py pipeline --extract-max-concurrency=50 --crawl-max-concurrency=10
 YEAR=2026 uv run main.py pipeline --extract-max-concurrency=50 --crawl-max-concurrency=10
 ```
-具体使用方式参考：![使用方法](./使用方法)。如果想了解项目的技术设计，参考：![技术设计](./技术设计)
+具体使用方式参考：![使用方法](./使用方法.md)。如果想了解项目的技术设计，参考：![技术设计](./技术设计.md)
 
 ## 结论与建议
 先说结论：
