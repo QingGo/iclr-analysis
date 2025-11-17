@@ -29,7 +29,7 @@ from util import (
     retry_async,
 )
 
-SCORE_THRESHOLD_2026 = 5
+SCORE_THRESHOLD_2026 = 6
 
 async def mark_completed_async(
     state: Dict[str, Any],
@@ -94,9 +94,10 @@ def build_full_index_v2() -> List[Dict[str, Any]]:
         decisions_notes = []
         for n in submission_notes:
             if n.forum in forum_high_ratings:
-                n["ratings"] = forum_high_ratings[n.forum][1]
-                n["avg_rating"] = forum_high_ratings[n.forum][0]
-                decisions_notes.append(n)
+                json_n = n.to_json()
+                json_n["ratings"] = forum_high_ratings[n.forum][1]
+                json_n["avg_rating"] = forum_high_ratings[n.forum][0]
+                decisions_notes.append(json_n)
     else:
         decisions_notes = client_v2.get_all_notes(
             invitation=submission_invitation, content={"venueid": VENUE_ID}
@@ -128,6 +129,8 @@ def normalize_index_item(note: Dict[str, Any]) -> Dict[str, Any]:
     authorids = get_value(content, "authorids", [])
     abstract = get_value(content, "abstract")
     keywords = get_value(content, "keywords", [])
+    ratings = get_value(content, "ratings", [])
+    avg_rating = get_value(content, "avg_rating", None)
     pdf_url = f"https://openreview.net/pdf?id={forum}"
     return {
         "paper_id": forum or cid,
@@ -139,6 +142,8 @@ def normalize_index_item(note: Dict[str, Any]) -> Dict[str, Any]:
         "keywords": keywords or [],
         "pdf_url": pdf_url,
         "venueid": VENUE_ID,
+        "ratings": ratings or [],
+        "avg_rating": avg_rating,
     }
 
 
