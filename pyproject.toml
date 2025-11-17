@@ -1,0 +1,18 @@
+[project]
+name = "iclr-paper-analysis"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "httpx>=0.28.1",
+    "openreview-py>=1.54.0",
+    "pandas>=2.3.3",
+    "plotly>=6.4.0",
+    "kaleido>=0.2.1",
+    "pymupdf>=1.26.6",
+    "python-dotenv>=1.2.1",
+    "wordcloud>=1.9.4",
+    "typer>=0.12.5",
+    "rich>=13.9.4",
+]
