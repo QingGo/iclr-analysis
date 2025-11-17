@@ -1,5 +1,7 @@
 # ICLR 2025/2026 论文对比分析
 
+ICLR 2025/2026 Paper Comparative Analysis. English Version: [README](./README_EN.md)
+
 本项目面向 ICLR 2025 与 ICLR 2026 论文集，用 LLM 提取论文中出现频次，提取年度热点主题与优化方向。统计与可视化由本项目代码自动完成。
 
 ## 快速开始
