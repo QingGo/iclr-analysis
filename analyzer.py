@@ -14,11 +14,8 @@ def load_extracted() -> List[Dict[str, Any]]:
     """Load all JSON extraction outputs from `data/extracted/` into memory."""
     items: List[Dict[str, Any]] = []
     for p in glob.glob(os.path.join("data", YEAR, "extracted", "*.json")):
-        try:
-            with open(p, "r", encoding="utf-8") as f:
-                items.append(json.load(f))
-        except Exception:
-            continue
+        with open(p, "r", encoding="utf-8") as f:
+            items.append(json.load(f))
     return items
 
 
@@ -58,11 +55,9 @@ def make_bar(data: List[tuple], title: str, path: str) -> None:
     fig = px.bar(df, x="count", y="label", orientation="h", title=title)
     fig.update_layout(yaxis={'categoryorder':'total ascending'})
     fig.write_html(path, include_plotlyjs="cdn")
-    try:
-        img_path = path.replace(".html", ".png")
-        fig.write_image(img_path, format="png", scale=2)
-    except Exception:
-        pass
+    img_path = path.replace(".html", ".png")
+    fig.write_image(img_path, format="png", scale=2)
+
 
 
 def make_wordcloud(tokens: List[str], path: str) -> None:

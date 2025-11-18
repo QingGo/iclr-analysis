@@ -115,7 +115,8 @@ def build_full_index_v2() -> List[Dict[str, Any]]:
                         json.dumps(n, default=lambda o: getattr(o, "__dict__", str(o)))
                     )
                 )
-            except Exception:
+            except Exception as e:
+                print(f"build_full_index_v2 dump fail: {e}, note {n}")
                 items.append({"_python_repr": str(n)})
     return items
 

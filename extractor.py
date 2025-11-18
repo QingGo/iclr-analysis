@@ -52,7 +52,8 @@ def extract_hyperparams(full_text: str) -> Dict[str, Any]:
     if m:
         try:
             hp["batch_size"] = int(m.group(1).replace(",", ""))
-        except Exception:
+        except Exception as e:
+            print(f"extract_hyperparams failed, error {e}")
             hp["batch_size"] = m.group(1)
     m = re.search(r"(?i)optimizer[:\s-]*([A-Za-z]+)", full_text)
     if m:
@@ -176,7 +177,8 @@ async def call_llm(
         tags = [str(x).strip() for x in obj.get("tags", [])][:20]
         opt = simplify_list(obj.get("optimizations", []))
         return tags, opt, usage
-    except Exception:
+    except Exception as e:
+        print(f"Error processing LLM response: {e}")
         return [], [], {"prompt_cache_hit_tokens": 0, "prompt_cache_miss_tokens": 0, "prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
 
 
@@ -193,12 +195,7 @@ async def process_one(
     out_path = os.path.join("data", YEAR, "extracted", f"{pid}.json")
     pdf_path = os.path.join("data", YEAR, "raw", f"{pid}.pdf")
     meta_path = os.path.join("data", YEAR, "meta", f"{pid}.json")
-    meta: Dict[str, Any] = item
-    if os.path.exists(meta_path):
-        try:
-            meta = json.load(open(meta_path, "r", encoding="utf-8"))
-        except Exception:
-            meta = item
+    meta: Dict[str, Any] = json.load(open(meta_path, "r", encoding="utf-8"))
     # 受限并发下进行解析与调用 LLM
     async with semaphore:
         try:
